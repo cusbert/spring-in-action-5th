@@ -5,6 +5,6 @@
 
 ## 개발 환경
 - java : openjdk 11.0.2
-- framework : Spring Boot 2.4.1
+- framework : Spring Boot 2.5.2
 - DB : maria DB 10.5.9
 - build : Maven
