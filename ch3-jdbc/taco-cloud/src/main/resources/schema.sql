@@ -5,14 +5,15 @@ create table if not exists Ingredient (
 );
 
 create table if not exists Taco (
-  id bigint NOT NULL PRIMARY KEY,
+  id bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(50) not NULL,
   createdAt timestamp not null
 );
 
 create table if not exists Taco_Ingredients (
-  taco bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  ingredient VARCHAR(4) not null
+  taco bigint NOT NULL,
+  ingredient VARCHAR(4) not NULL,
+  constraint primary key(taco, ingredient)
 );
 
 alter table Taco_Ingredients
