@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,7 @@ public class Order {
     private String deliveryCity;
 
     @NotBlank(message = "State is required")
+    @Size(max = 2, message = "State must be up to 2 characters long")
     private String deliveryState;
 
     @NotBlank(message = "Zip code is required")
