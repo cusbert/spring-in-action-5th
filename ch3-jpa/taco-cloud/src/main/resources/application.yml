@@ -6,10 +6,20 @@ spring:
     username: sa
     password: sa
 
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true #show sql
+        format_sql: true #To beautify or pretty print the SQL
+
+
     
 logging:
   level:
     tacos: WARN
+    org.hibernate.type.descriptor.sql: trace # Binding param
 
 #logging:
 #  level:
