@@ -1,0 +1,26 @@
+# local / prod
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/tacodb?characterEncoding=UTF-8&serverTimezone=UTC
+    username: sa
+    password: sa
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true #show sql
+        format_sql: true #To beautify or pretty print the SQL
+
+
+    
+logging:
+  level:
+    tacos: WARN
+    org.hibernate.type.descriptor.sql: trace # Binding param
+
+#logging:
+#  level:
+#    org.springframework.data.rest: debug
