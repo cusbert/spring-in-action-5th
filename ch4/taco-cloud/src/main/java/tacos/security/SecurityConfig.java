@@ -35,7 +35,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        // JDBC 기반의 사용자 스토어
+        // LDAP 기반 사용자 스토어
+        auth.ldapAuthentication()
+                .userSearchBase("ou=people")
+                .userSearchFilter("(uid={0})")
+                .groupSearchBase("ou=groups")
+                .groupSearchFilter("(member={0})")
+                .contextSource()
+                .root("dc=tacocloud,dc=com")
+                .ldif("classpath:users.ldif")
+                .and()
+                .passwordCompare()
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .passwordAttribute("userPasscode");
+
+
+        /* JDBC 기반의 사용자 스토어
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(
@@ -46,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 "where username=?")
                 .passwordEncoder(new NoEncodingPasswordEncoder());
                 // .passwordEncoder(new BCryptPasswordEncoder());
+        */
 
         /* 인메모리 기반 사용자 스토어 예제
         auth.inMemoryAuthentication()
