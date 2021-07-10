@@ -25,6 +25,7 @@ public class UserRepositoryUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUsername(username);
 
         if (user != null) {
+            System.out.println("user found " + user.getUsername());
             return user;
         }
 

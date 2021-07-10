@@ -34,16 +34,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/design", "/orders") // ROLE_USER 권한이 있는 유저만 허용
+                .antMatchers("/designs", "/orders") // ROLE_USER 권한이 있는 유저만 허용
                 .access("hasRole('ROLE_USER')")
                 .antMatchers("/", "/**")
                 .access("permitAll") // 이 외의 요청은 모두 허용
                 .and() // 인증 구성이 끝나서 http 구성을 적용할 준비가 되었다
                     .formLogin() // 커스텀 로그인 폼을 구성하기 위해 호출
                     .loginPage("/login")
-                    // .loginProcessingUrl("/authenticate") // /authenticate 경로의 로그인 처리
-                    .defaultSuccessUrl("/designs") // 로그인 페이지로 이동한 후 로그인 성공시 /design 페이지로 이동
-                    //.defaultSuccessUrl("/designs", true) // 로그인 전에 어떤 페이지에 있었던 로그인 성공시 /design 페이지로 이동
+                    //.loginProcessingUrl("/authenticate") // /authenticate 경로의 로그인 처리
+                    //.defaultSuccessUrl("/designs") // 로그인 페이지로 이동한 후 로그인 성공시 /design 페이지로 이동
+                    .defaultSuccessUrl("/designs", true) // 로그인 전에 어떤 페이지에 있었던 로그인 성공시 /design 페이지로 이동
+                    .failureUrl("/login?error=true")
                     //.usernameParameter("user")
                     //.passwordParameter("pwd")
                 .and()
