@@ -12,5 +12,6 @@ class WebConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         // WebMvcConfigurer 로 "/" 경로 요청 시 view 지정
         registry.addViewController("/").setViewName("home");
+        registry.addViewController("/login");
     }
 }
