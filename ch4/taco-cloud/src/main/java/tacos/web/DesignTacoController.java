@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
-@RequestMapping("/designs")
+@RequestMapping("/design")
 @SessionAttributes("order") // 세션에 저장해둘 모델객체
 public class DesignTacoController {
 
