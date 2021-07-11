@@ -5,7 +5,6 @@ spring:
     url: jdbc:mariadb://localhost:3306/tacodb?characterEncoding=UTF-8&serverTimezone=UTC
     username: sa
     password: sa
-    # initialization-mode: always
 
   jpa:
     hibernate:
@@ -15,13 +14,32 @@ spring:
         show_sql: true #show sql
         format_sql: true #To beautify or pretty print the SQL
 
-
+  schema:
+  data:
+    - data.sql
     
+logging:
+  level:
+    tacos: DEBUG
+    org.hibernate.type.descriptor.sql: trace # Binding param
+
+server:
+  port: 8080
+
+taco:
+  orders:
+    pageSize: 10
+
+---
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/tacodb?characterEncoding=UTF-8&serverTimezone=UTC
+    username: sa
+    password: sa
+
 logging:
   level:
     tacos: WARN
     org.hibernate.type.descriptor.sql: trace # Binding param
-
-#logging:
-#  level:
-#    org.springframework.data.rest: debug
