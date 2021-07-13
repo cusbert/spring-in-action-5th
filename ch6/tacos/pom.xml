@@ -44,11 +44,6 @@
 			<artifactId>tacocloud-api</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>sia</groupId>
-			<artifactId>tacocloud-ui</artifactId>
-			<version>${tacocloud.version}</version>
-		</dependency>
 
 		<!-- mariadb -->
 		<dependency>
