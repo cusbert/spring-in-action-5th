@@ -7,8 +7,6 @@
 - `tacocloud-data` : The persistence module
 - `tacocloud-domain` : The domain types
 - `tacocloud-security` : The security module (TODO: Not fully functional yet.)
-- `tacos` : The main module that pulls the other modules together and provides the Spring Boot main class.
-
 
 ## Frontend
 - Angular 코드는 기존의 실습 예제 그대로 이용하는 대신 폴더를 분리하여 실행

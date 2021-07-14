@@ -1,4 +1,4 @@
-package tacos.web.api;
+package tacos.api.controller;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import tacos.data.TacoRepository;
 import tacos.domain.Taco;
-import tacos.web.hateoas.TacoResource;
-import tacos.web.hateoas.TacoResourceAssembler;
+import tacos.api.hateoas.TacoResource;
+import tacos.api.hateoas.TacoResourceAssembler;
 
 import java.util.List;
 
