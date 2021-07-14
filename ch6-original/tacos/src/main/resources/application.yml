@@ -1,0 +1,52 @@
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/tacodb?characterEncoding=UTF-8&serverTimezone=UTC
+    username: sa
+    password: sa
+
+  data:
+    rest:
+      base-path: /api
+
+jpa:
+  hibernate:
+    ddl-auto: update
+  properties:
+    hibernate:
+      show_sql: true #show sql
+      format_sql: true #To beautify or pretty print the SQL
+
+security:
+  user:
+    name: buzz
+    password: infinity
+
+taco:
+  orders:
+    pageSize: 10
+
+
+  discount:
+    codes:
+      abcdef: 10
+      
+#logging:
+#  level:
+#    org.springframework.data.rest: debug
+
+
+---
+spring:
+  profiles: prod
+  
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: tacouser
+    password: tacopassword
+    
+logging:
+  level:
+    tacos: WARN
+    
