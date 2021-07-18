@@ -23,14 +23,23 @@ public class RestClient {
     public RestClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-
+    /* GET */
     public Ingredient getIngredientById(String id) {
         return restTemplate.getForObject("http://localhost:8080/ingredients/{id}",
                 Ingredient.class,
                 id);
     }
 
-    /* GET */
+    // getForEntity
+    public Ingredient getIngredientByIdWithEntity(String id) {
+        ResponseEntity<Ingredient> responseEntity =
+                restTemplate.getForEntity("http://localhost:8080/ingredients/{id}",
+                        Ingredient.class,
+                        id);
+        log.info("Fetched time: " +
+                responseEntity.getHeaders().getDate());
+        return responseEntity.getBody();
+    }
 
     // Map을 사용하새 URL 변수 저장
     public Ingredient getIngredientByIdWithMap(String id) {
@@ -49,17 +58,6 @@ public class RestClient {
                 .fromHttpUrl("http://localhost:8080/ingredients/{id}")
                 .build(urlVariables);
         return restTemplate.getForObject(url, Ingredient.class);
-    }
-
-    // getForEntity
-    public Ingredient getIngredientByIdUsingGetForEntity(String id) {
-        ResponseEntity<Ingredient> responseEntity =
-                restTemplate.getForEntity("http://localhost:8080/ingredients/{id}",
-                        Ingredient.class,
-                        id);
-        log.info("Fetched time: " +
-                responseEntity.getHeaders().getDate());
-        return responseEntity.getBody();
     }
 
     // exchange
@@ -87,7 +85,7 @@ public class RestClient {
     }
 
     // postForEntity
-    public Ingredient createIngredientWithPostForEntity(Ingredient ingredient) {
+    public Ingredient createIngredientWithEntity(Ingredient ingredient) {
         ResponseEntity<Ingredient> responseEntity =
                 restTemplate.postForEntity("http://localhost:8080/ingredients",
                         ingredient,

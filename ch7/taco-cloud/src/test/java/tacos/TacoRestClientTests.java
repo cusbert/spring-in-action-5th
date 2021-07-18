@@ -23,7 +23,7 @@ public class TacoRestClientTests {
     public void fetchIngredientOne() {
         log.info("----------------------- GET -------------------------");
         log.info("GETTING INGREDIENT BY IDE");
-        log.info("Ingredient:  " + restClient.getIngredientByIdUsingGetForEntity("FLTO"));
+        log.info("Ingredient:  " + restClient.getIngredientByIdWithEntity("FLTO"));
     }
 
     @Test
