@@ -24,27 +24,27 @@ public class RestClient {
         this.restTemplate = restTemplate;
     }
 
-    public Ingredient getIngredientById(String ingredientId) {
+    public Ingredient getIngredientById(String id) {
         return restTemplate.getForObject("http://localhost:8080/ingredients/{id}",
                 Ingredient.class,
-                ingredientId);
+                id);
     }
 
     /* GET */
 
     // Map을 사용하새 URL 변수 저장
-    public Ingredient getIngredientByIdWithMap(String ingredientId) {
+    public Ingredient getIngredientByIdWithMap(String id) {
         Map<String, String> urlVariables = new HashMap<>();
-        urlVariables.put("id", ingredientId);
+        urlVariables.put("id", id);
         return restTemplate.getForObject("http://localhost:8080/ingredients/{id}",
                 Ingredient.class,
                 urlVariables);
     }
 
     // URI 매개변수를 사용하기
-    public Ingredient getIngredientByIdWithURI(String ingredientId) {
+    public Ingredient getIngredientByIdWithURI(String id) {
         Map<String, String> urlVariables = new HashMap<>();
-        urlVariables.put("id", ingredientId);
+        urlVariables.put("id", id);
         URI url = UriComponentsBuilder
                 .fromHttpUrl("http://localhost:8080/ingredients/{id}")
                 .build(urlVariables);
@@ -52,11 +52,11 @@ public class RestClient {
     }
 
     // getForEntity
-    public Ingredient getIngredientByIdUsingGetForEntity(String ingredientId) {
+    public Ingredient getIngredientByIdUsingGetForEntity(String id) {
         ResponseEntity<Ingredient> responseEntity =
                 restTemplate.getForEntity("http://localhost:8080/ingredients/{id}",
                         Ingredient.class,
-                        ingredientId);
+                        id);
         log.info("Fetched time: " +
                 responseEntity.getHeaders().getDate());
         return responseEntity.getBody();
@@ -87,15 +87,15 @@ public class RestClient {
     }
 
     // postForEntity
-     public Ingredient createIngredientWithPostForEntity(Ingredient ingredient) {
-       ResponseEntity<Ingredient> responseEntity =
-               restTemplate.postForEntity("http://localhost:8080/ingredients",
-                                 ingredient,
-                                 Ingredient.class);
-       log.info("New resource created at " +
+    public Ingredient createIngredientWithPostForEntity(Ingredient ingredient) {
+        ResponseEntity<Ingredient> responseEntity =
+                restTemplate.postForEntity("http://localhost:8080/ingredients",
+                        ingredient,
+                        Ingredient.class);
+        log.info("New resource created at " +
                 responseEntity.getHeaders().getLocation());
-       return responseEntity.getBody();
-     }
+        return responseEntity.getBody();
+    }
 
     /* PUT */
     // put

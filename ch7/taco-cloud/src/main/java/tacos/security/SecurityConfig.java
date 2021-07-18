@@ -35,32 +35,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll() // needed for Angular/CORS
-                .antMatchers("/design", "/orders") // ROLE_USER 권한이 있는 유저만 허용
-                //.access("hasRole('ROLE_USER')")
-                .access("permitAll")
-                //.antMatchers("/", "/**")
+                .antMatchers(HttpMethod.POST, "/api/ingredients").permitAll()
+                .antMatchers("/design", "/orders/**")
+                    .permitAll()
+                    //.access("hasRole('ROLE_USER')")
+                // .antMatchers(HttpMethod.PATCH, "/ingredients").permitAll()
+                .antMatchers("/ingredients/**").permitAll()
+                .antMatchers("/ingredients").permitAll()
+                .antMatchers("/**").access("permitAll")
+
                 .antMatchers("/swagger-ui.html").access("permitAll")
-                .antMatchers(HttpMethod.PATCH, "/ingredients").permitAll()
                 .antMatchers("/**").access("permitAll")
 
                 .and() // 인증 구성이 끝나서 http 구성을 적용할 준비가 되었다
                     .formLogin() // 커스텀 로그인 폼을 구성하기 위해 호출
-                    .loginPage("/login")
-                //.defaultSuccessUrl("/design", true) // 로그인 전에 어떤 페이지에 있었던 로그인 성공시 /design 페이지로 이동
-                //.failureUrl("/login?error=true")
+                        .loginPage("/login")
+                        //.defaultSuccessUrl("/design", true) // 로그인 전에 어떤 페이지에 있었던 로그인 성공시 /design 페이지로 이동
+                        //.failureUrl("/login?error=true")
 
                 .and()
                     .httpBasic()
-                    .realmName("Taco Cloud")
+                        .realmName("Taco Cloud")
 
                 .and()
                     .logout()
-                    .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/")
 
                 .and()
                     .csrf()
-                        .ignoringAntMatchers("/h2-console/**", "/ingredients/**", "/design", "/orders/**")
+                        .ignoringAntMatchers("/h2-console/**",  "/ingredients", "/ingredients/**", "/design", "/orders/**", "/api/**")
 
                 // Allow pages to be loaded in frames from the same origin; needed for H2-Console
                 .and()
