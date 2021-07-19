@@ -7,6 +7,7 @@
 - `tacocloud-data` : The persistence module
 - `tacocloud-domain` : The domain types
 - `tacocloud-security` : The security module (TODO: Not fully functional yet.)
+- `tacocloud-restClient` : Client code that consumes the API exposed from `tacocloud-api`.
 
 ## Frontend
 - Angular 코드는 기존의 실습 예제 그대로 이용하는 대신 폴더를 분리하여 실행
