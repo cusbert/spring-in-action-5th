@@ -17,6 +17,12 @@ spring:
   schema:
   data:
     - data.sql
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: secret
     
 logging:
   level:
