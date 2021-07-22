@@ -1,23 +1,40 @@
-# Spring in Action 6장
-- https://github.com/Jpub/SpringInAction5 
-- 제공된 교제 예제 코드 참고 하여 수정함
+# Spring In Action 8장
 
-## 구조  
-- `tacocloud-api` : The REST API
-- `tacocloud-data` : The persistence module
-- `tacocloud-domain` : The domain types
-- `tacocloud-security` : The security module (TODO: Not fully functional yet.)
+## 환경 구성
+### rabbitMQ docker 로 설치
+```bash
+docker run -d --hostname my-rabbit --name some-rabbit -p 5672:5672 -p 8090:15672 -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=secret rabbitmq:3-management
+```
+
+
+## 구조
+### Producer
+- `api` : The REST API
+- `data` : The persistence
+- `domain` : The domain types
+- `security` : The security module
+- `restclient` : Client code that consumes the API exposed from `tacocloud-api`.
+- `messagingRabbit` : RabbitMQ producer
+
+### Consumer
+- `taco-cloud-consumer` : RabbitMQ consumer
+
 
 ## Frontend
 - Angular 코드는 기존의 실습 예제 그대로 이용하는 대신 폴더를 분리하여 실행
-https://github.com/cusbert/spring-in-action-5th/tree/main/tacocloud-ui
-tacocloud-ui 폴더로 이동
+  https://github.com/cusbert/spring-in-action-5th/tree/main/tacocloud-ui
+  tacocloud-ui 폴더로 이동
 ```bash
 npm install
 npm start
 ```
 
-## Backend
-https://github.com/cusbert/spring-in-action-5th/tree/main/ch6
+## Backend - producer
+https://github.com/cusbert/spring-in-action-5th/tree/main/ch8/taco-cloud
 - swagger 로 확인
   http://localhost:8080/swagger-ui.html
+
+## Backend - consumer
+https://github.com/cusbert/spring-in-action-5th/tree/main/ch8/taco-cloud-consumer
+- swagger 로 확인
+  http://localhost:8090/swagger-ui.html
