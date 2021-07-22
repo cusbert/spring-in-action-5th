@@ -1,0 +1,16 @@
+# local / prod
+spring:
+  rabbitmq:
+    dynamic: true
+    host: localhost
+    port: 5672
+    username: admin
+    password: secret
+    
+logging:
+  level:
+    tacos: DEBUG
+
+server:
+  port: 8081
+
