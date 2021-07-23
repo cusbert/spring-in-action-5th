@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/ingredients").permitAll()
-                .antMatchers("/design", "/orders/**")
+                .antMatchers("/design", "/orders/**", "/produce/**")
                     .permitAll()
                     //.access("hasRole('ROLE_USER')")
                 // .antMatchers(HttpMethod.PATCH, "/ingredients").permitAll()
@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                     .csrf()
-                        .ignoringAntMatchers("/h2-console/**",  "/ingredients", "/ingredients/**", "/design", "/orders/**", "/api/**")
+                        .ignoringAntMatchers("/h2-console/**",  "/ingredients", "/ingredients/**", "/design", "/orders/**", "/api/**", "/produce/**")
 
                 // Allow pages to be loaded in frames from the same origin; needed for H2-Console
                 .and()

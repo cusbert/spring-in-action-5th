@@ -1,4 +1,4 @@
-package tacos.messagingRabbit;
+package tacos.messaging;
 
 import tacos.domain.Order;
 

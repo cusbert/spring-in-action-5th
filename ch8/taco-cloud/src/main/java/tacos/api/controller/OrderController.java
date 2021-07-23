@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tacos.data.OrderRepository;
 import tacos.domain.Order;
-import tacos.messagingRabbit.RabbitOrderProducerService;
 
 @RestController
 @RequestMapping(path = "/orders", produces = "application/json")
@@ -13,23 +12,14 @@ import tacos.messagingRabbit.RabbitOrderProducerService;
 public class OrderController {
 
     private OrderRepository orderRepository;
-    private RabbitOrderProducerService rabbitOrderProducerService;
 
-    public OrderController(OrderRepository orderRepository,
-                           RabbitOrderProducerService rabbitOrderProducerService) {
+    public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.rabbitOrderProducerService = rabbitOrderProducerService;
     }
 
     @GetMapping(produces = "application/json")
     public Iterable<Order> allOrders() {
         return orderRepository.findAll();
-    }
-
-    @PostMapping(path = "/produce", consumes = "application/json")
-    @ResponseStatus(HttpStatus.OK)
-    public void produceOrder(@RequestBody Order order) {
-        rabbitOrderProducerService.sendOrder(order);
     }
 
     @PostMapping(consumes = "application/json")

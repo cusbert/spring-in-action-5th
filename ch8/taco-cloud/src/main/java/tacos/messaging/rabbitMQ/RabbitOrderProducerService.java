@@ -1,4 +1,4 @@
-package tacos.messagingRabbit;
+package tacos.messaging.rabbitMQ;
 
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
@@ -8,6 +8,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tacos.domain.Order;
+import tacos.messaging.OrderMessagingService;
 
 @Service
 public class RabbitOrderProducerService implements OrderMessagingService {
@@ -19,6 +20,7 @@ public class RabbitOrderProducerService implements OrderMessagingService {
     }
 
     public void sendOrder(Order order) {
+        System.out.println("### Send Order");
         rabbit.convertAndSend("tacocloud.order.queue", order,
                 new MessagePostProcessor() {
                     @Override
