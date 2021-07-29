@@ -22,11 +22,22 @@ spring:
     port: 5672
     username: admin
     password: secret
+
+  kafka:
+    bootstrap-servers:
+      - localhost:29092
+    template:
+      default-topic: tacocloud.orders.topic
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: tacocloud_kitchen
+      properties:
+        spring.json.trusted.packages: tacos.domain
     
 logging:
   level:
     tacos: DEBUG
 
 server:
-  port: 8081
+  port: 8090
 
