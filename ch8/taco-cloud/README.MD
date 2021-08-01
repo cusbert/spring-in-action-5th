@@ -14,10 +14,12 @@ docker run -d --hostname my-rabbit --name some-rabbit -p 5672:5672 -p 8090:15672
 - `domain` : The domain types
 - `security` : The security module
 - `restclient` : Client code that consumes the API exposed from `tacocloud-api`.
-- `messagingRabbit` : RabbitMQ producer
+- `messaging` > `jms` : Messaging module that sends messages using JMS
+- `messaging` > `rabbitMQ` : Messaging module that sends messages using RabbitMQ
+- `messaging` > `kafka` : Messaging module that sends messages using Kafka
 
 ### Consumer
-- `taco-cloud-consumer` : RabbitMQ consumer
+- `taco-cloud-consumer` : Messaging module that receive messages using JMS,RabbitMQ,Kafka
 
 
 ## Frontend
