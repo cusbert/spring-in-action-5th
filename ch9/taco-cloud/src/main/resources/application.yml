@@ -1,0 +1,74 @@
+# local / prod
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/tacodb?characterEncoding=UTF-8&serverTimezone=UTC
+    username: sa
+    password: sa
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true #show sql
+        format_sql: true #To beautify or pretty print the SQL
+
+  schema:
+  data:
+    - data.sql
+
+  # JMS
+  jms:
+    template:
+      default-destination: tacocloud.order.queue
+
+  # Artemis
+  artemis:
+    host: localhost
+    port: 61616
+    user: admin
+    password: admin
+    embedded:
+      enabled: false
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: secret
+
+  kafka:
+    bootstrap-servers:
+      - localhost:29092
+    template:
+      default-topic: tacocloud.orders.topic
+    producer:
+      keySerializer: org.springframework.kafka.support.serializer.JsonSerializer
+      valueSerializer: org.springframework.kafka.support.serializer.JsonSerializer
+    
+logging:
+  level:
+    tacos: DEBUG
+    org.hibernate.type.descriptor.sql: trace # Binding param
+
+server:
+  port: 8080
+
+taco:
+  orders:
+    pageSize: 10
+
+---
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/tacodb?characterEncoding=UTF-8&serverTimezone=UTC
+    username: sa
+    password: sa
+
+logging:
+  level:
+    tacos: WARN
+    org.hibernate.type.descriptor.sql: trace # Binding param
