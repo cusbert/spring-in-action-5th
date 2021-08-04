@@ -72,3 +72,19 @@ logging:
   level:
     tacos: WARN
     org.hibernate.type.descriptor.sql: trace # Binding param
+
+---
+spring:
+  profiles: email
+  main:
+    web-application-type: none
+# email flow
+tacocloud:
+  email:
+    host: imap.tacocloud.com
+    mailbox: INBOX
+    username: taco-in-flow
+    password: secret
+    poll-rate: 10000
+  api:
+    url: http://localhost:8080/orders/fromEmail
